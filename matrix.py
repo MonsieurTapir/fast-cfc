@@ -34,7 +34,7 @@ class Matrix:
                 if len(self.m[i]) != i+1:
                     print("WARNING! Matrix file is corrupted.")
                 #print(i,"--->",self.m[i])
-        self.n = i
+        self.n = i+1
         print("n =",self.n)
 
     def print(self):
