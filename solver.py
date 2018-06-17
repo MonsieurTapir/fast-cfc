@@ -1,7 +1,7 @@
 import math
 import sys
 from matrix import Matrix
-
+from greedy import Greedy
 class BruteForcer:
     def __init__(self,mat):
         self.dim=mat.getdimension()
@@ -94,7 +94,12 @@ if __name__ == "__main__":
      else:
           m.createMatrix(dim)
      s=BruteForcer(m)
+     g=Greedy(m)
      m.print()
      s.solve()
      print("Best found: ",end="")
      s.print()
+     print("======================")
+     g.solve()
+     print("Greedy found: ",end="")
+     g.print()
