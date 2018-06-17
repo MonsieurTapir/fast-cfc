@@ -1,11 +1,14 @@
 import random
 import math
+import sys
+
 class Matrix:
+
 
    def __init__(self):
       self.n = 0       # dimension
       self.m = None    # our matrix
-      
+
    def createMatrix(self,dim):
       self.n = dim
       self.m = []
@@ -18,7 +21,7 @@ class Matrix:
                v = 1
             self.m[i].append(v)
          self.m[i].append(1)
-            
+
 
    def print(self):
       for i in range(self.n):
@@ -31,7 +34,7 @@ class Matrix:
 
    def getdimension(self):
       return self.n
-    
+
 class BruteForcer:
    def __init__(self,dim,mat):
        self.dim=dim
@@ -44,18 +47,18 @@ class BruteForcer:
        for i in range(dim):
           self.solution.append(0)
           self.best_solution.append(0)
-            
+
    def check_solution(self):
       checker=[]
       supports=[]
-        
+
       for i in range(self.current):
          checker.append([])
          supports.append([])
          for j in range(i+1):
             checker[i].append([])
             supports[i].append([])
-       
+
       i=self.current-1
       for j in range(i+1):
          if self.instance.get(i,j):
@@ -66,15 +69,15 @@ class BruteForcer:
                   supports[i][j].append(c)
                elif c in supports[i][j]:
                   supports[i][j].remove(c)
-                        
- 
+
+
       for j in range(i+1):
          if self.instance.get(i,j) and not supports[i][j]:
             return False
-                
+
       return True
-    
- 
+
+
    def solve(self):
       if not self.check_solution():
          return
@@ -87,7 +90,7 @@ class BruteForcer:
          self.print()
          print("> New bound to beat:",self.best_bound)
          return
-        
+
       for c in range(1,self.best_bound+1):
          self.solution[self.current]=c
          self.current+=1
@@ -97,13 +100,13 @@ class BruteForcer:
 
          if self.max_color<self.best_bound:
             self.solve()
-         
+
          self.max_color=old_max
          self.current-=1
-            
+
          if c>=self.best_bound:
             break
-         
+
    def print_current(self):
       for i in range(self.dim):
          print("",self.solution[i],end="")
@@ -115,6 +118,8 @@ class BruteForcer:
 
 if __name__ == "__main__":
     dim=20
+    if len(sys.argv)>1:
+        dim = int(sys.argv[1])
     m = Matrix()
     m.createMatrix(dim)
     s=BruteForcer(dim,m)
