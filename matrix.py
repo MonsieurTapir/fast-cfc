@@ -29,11 +29,11 @@ class Matrix:
                     self.n = i
                     break
                 self.m.append([])
-                print(l.strip())
-                self.m[i] = l.strip(", ").split()
+                #print(l.strip())
+                self.m[i] = [int(x) for x in l.strip(", ").split()]
                 if len(self.m[i]) != i+1:
                     print("WARNING! Matrix file is corrupted.")
-                print(i,"--->",self.m[i])
+                #print(i,"--->",self.m[i])
         self.n = i
         print("n =",self.n)
 
