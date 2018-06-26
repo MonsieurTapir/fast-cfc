@@ -4,7 +4,19 @@ class Matrix:
     def __init__(self):
         self.n = 0           # dimension
         self.m = None        # our matrix
-
+    def createMatrixfromString(self,dim,string):
+        self.n=dim
+        self.m=[]
+        k=0
+        for i in range(self.n):
+            self.m.append([])
+            for j in range (i):
+                self.m[i].append(0)
+            self.m[i].append(1)
+        for i in range(self.n):
+            for j in range(i):
+                self.m[i][j]=int(string[k])
+                k+=1
     def createMatrix(self,dim):
         self.n = dim
         self.m = []
@@ -13,7 +25,7 @@ class Matrix:
             self.m.append([])
             for j in range(i):
                 v = 0
-                if random.randint(0,5) == 0:
+                if random.randint(0,2) == 0:
                     v = 1
                 self.m[i].append(v)
             self.m[i].append(1)

@@ -63,7 +63,8 @@ class Greedy:
                 solution[i]=verif_solution[i]
             solution[current]=1
             self.max_color=max_color
-        
+    def get_opt_val(self):
+        return self.max_color
     def solve(self):
         for i in range(self.dim):
             c=1
