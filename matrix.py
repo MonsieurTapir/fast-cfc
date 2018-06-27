@@ -2,14 +2,15 @@ import random
 
 class Matrix:
     def __init__(self):
-        self.n = 0           # dimension
         self.m = None        # our matrix
+
     def createMatrixfromString(self,dim,string):
         self.n=dim
         self.m=[]
         k=0
         for i in range(self.n):
             self.m.append([])
+            self.n = 0           # dimension
             for j in range (i):
                 self.m[i].append(0)
             self.m[i].append(1)
@@ -17,6 +18,7 @@ class Matrix:
             for j in range(i):
                 self.m[i][j]=int(string[k])
                 k+=1
+
     def createMatrix(self,dim):
         self.n = dim
         self.m = []
@@ -32,24 +34,24 @@ class Matrix:
 
     def readMatrix(self,file):
         self.m = []
-        i = -1
+        i = 0
         with open(file) as f:
             lines = f.readlines()
             for l in lines:
-                i+=1
                 if len(l.strip()) == 0:
-                    self.n = i
+                    # empty line
                     break
                 self.m.append([])
-                #print(l.strip())
                 self.m[i] = [int(x) for x in l.strip(", ").split()]
                 if len(self.m[i]) != i+1:
+                    print(len(self.m[i]),"vs",i)
                     print("WARNING! Matrix file is corrupted.")
-                #print(i,"--->",self.m[i])
-        self.n = i+1
-        print("n =",self.n)
+                i+=1
+        self.n = i
+        print("Matrix dimension:",self.n)
 
     def print(self):
+        print(self.m)
         for i in range(self.n):
             for j in range(i+1):
                 print("",self.get(i,j),end="")

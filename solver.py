@@ -121,10 +121,14 @@ if __name__ == "__main__":
         dim = int(sys.argv[1])
     if dim <= 0:
         m.readMatrix(sys.argv[2])
+        dim = m.getdimension()
     else:
         m.createMatrix(dim)
-    k=0
-    test_all_instances(dim)
+    s = BruteForcer(m)
+    s.solve()
+    s.print()
+    #k=0
+    #test_all_instances(dim)
     '''
     while 1:
         m=Matrix()
