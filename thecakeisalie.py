@@ -17,7 +17,7 @@ def createMatchingGraph(m):
         # the default color
         g.add_node(v+"_d")
         g.add_edge(v,v+"_d",weight=0.1)
-        v_k_pair = [(str(v)+"_"+str(i), int(i+1)) for i in range(k+1)]
+        v_k_pair = [(str(v)+"_"+str(i), int(i+1)) for i in range(k)]
         print(v_k_pair)
         g.add_nodes_from([a for (a,b) in v_k_pair])
         # with weighted edges
@@ -29,7 +29,6 @@ def createMatchingGraph(m):
     # We create odd cliques, hence a matching must cover a vertex (sharing an edge with a color verte)
     # in each clique; this is our support.
 
-    # OLD VERSION
     for i in range(n):
         for j in range(i):
             if m.get(i,j) >= 1:
@@ -39,21 +38,14 @@ def createMatchingGraph(m):
                 if ((i-j+1)*k % 2 == 0):
                     x = "x"+str(j)+"_"+str(i)
                     g.add_node(x)
-                    tset = itertools.permutations(itertools.chain([x],[str(a)+"_"+str(b) for (a,b) in itertools.product(range(j,i+1),range(k+1))]),2)
+                    tset = itertools.permutations(itertools.chain([x],[str(a)+"_"+str(b) for (a,b) in itertools.product(range(j,i+1),range(k))]),2)
                 else:
-                    tset = itertools.permutations([str(str(a)+"_"+str(b)) for a,b in itertools.product(range(j,i+1),range(k+1))],2)
+                    tset = itertools.permutations([str(str(a)+"_"+str(b)) for a,b in itertools.product(range(j,i+1),range(k))],2)
                 for t in tset:
                     # print1(t)
                     if t[0] == t[1]:
                         continue
                     g.add_edge(t[0],t[1],weight=(n+k+2)^2)
-
-    # NEW VERSION
-    # for i in range(n):
-    #     for j in range(i+1):
-    #         if m.get(i,j) >= 1:
-    #             for t in itertools.product(itertools.combinations(range(j,i+1),2), itertools.combinations(range(k),2)):
-    #                 pass
 
     matching = sorted([ sorted(x) for x in nx.max_weight_matching(g)])
     for v1,v2 in matching:
