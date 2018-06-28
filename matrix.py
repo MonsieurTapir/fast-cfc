@@ -51,7 +51,7 @@ class Matrix:
         print("Matrix dimension:",self.n)
 
     def print(self):
-        print(self.m)
+        # print(self.m)
         for i in range(self.n):
             for j in range(i+1):
                 print("",self.get(i,j),end="")
